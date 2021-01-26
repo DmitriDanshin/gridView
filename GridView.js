@@ -3,10 +3,11 @@ class GridView {
         properties
         @param [array] _tableClass - css classes
         @param [array] data - input data
-        @param [array] _attributes - output from input data
+        @param [array] attributes - output from input data
         @param [array] _element - output of table
         @param _header - header of table
         @param [array] _headerClass - css classes of header
+
      */
 
     constructor() {
@@ -14,7 +15,7 @@ class GridView {
         this._headerClass = [];
         this._tableClass = [];
         this._element = 'body';
-        this._attributes = [];
+        this.attributes = {};
 
     }
 
@@ -38,9 +39,9 @@ class GridView {
         return false;
     }
 
-    set element(element){
-        if(document.querySelector(element)){
-            this._element = document.querySelector(element);
+    set element(element) {
+        if (document.querySelector(element)) {
+            this._element = element;
             return true;
         }
         return false
@@ -49,7 +50,64 @@ class GridView {
     // Method for show GridViewTable
     render() {
 
+        // show header
+        if (this._header) {
+            const header = document.createElement('h1');
+            header.textContent = this._header;
+            header.classList.add(...this._headerClass);
+            document.querySelector(this._element).append(header);
+        }
+
+        // show table
+        const table = document.createElement('table');
+        table.classList.add(...this._tableClass);
+
+        // create table header
+        const trHeader = document.createElement('tr');
+        const keys = Object.keys(this.attributes);
+
+        keys.forEach(key => {
+
+            const th = document.createElement('th');
+            const label = this.attributes[key].label;
+
+            label ? th.textContent = label : th.textContent = key;
+            trHeader.append(th);
+        });
+
+        table.append(trHeader);
+        document.querySelector(this._element).append(table);
+
+        // draw table
+
+        this.data.forEach((item, i, data) =>{
+
+            let dataArr = this.data[i]; // string of data
+            const tr = document.createElement('tr');
+            const keys = Object.keys(this.attributes);
+
+            keys.forEach(key =>{
+
+                const td = document.createElement('td');
+                let value = dataArr[key];
+                const attributesKey = this.attributes[key];
+
+                // src
+                if (attributesKey.src){
+                    td.innerHTML = value;
+                }
+
+                else{
+                    td.textContent = value;
+                }
+
+                tr.append(td);
+            });
+            table.append(tr);
+        })
+
     }
+
 
 
 }

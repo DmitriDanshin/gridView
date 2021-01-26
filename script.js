@@ -1,28 +1,56 @@
 const dataExample = [
     {
-        company: 'Alfreds <b>Futterkiste</b>',
-        chef: 'Maria Anders',
-        country: 'Germany'
+        company: '<b>Google</b>',
+        chef: '',
+        country: 'USA',
+        age: 43
     },
     {
-        company: 'Centro comercial Moctezuma',
-        chef: 'Francisco Chang',
-        country: 'Mexico'
+        company: 'Facebook',
+        chef: '',
+        country: 'USA',
+        age: 34
     },
     {
-        company: 'Ernst Handel',
-        chef: 'Roland Mendel',
-        country: 'Austria',
+        company: 'Yandex',
+        chef: '',
+        country: 'Russia',
+        age: 59
     },
     {
-        company: 'Island Trading',
-        chef: 'Helen Bennett',
-        country: 'UK'
+        company: 'Amazon',
+        chef: '',
+        country: 'USA',
+        age: 60
     },
     {
-        company: 'Laughing Bacchus Winecellars',
-        chef: 'Yoshi Tannamuri',
-        country: 'Canada',
+        company: 'BMW',
+        chef: '',
+        country: 'Germany',
+        age: 20
     }
 ];
 
+const gridView = new GridView();
+gridView.header = 'GridView';
+gridView.headerClass = ['header', 'site-header'];
+gridView.data = dataExample;
+
+gridView.attributes = {
+    'company': {
+        'label': 'Компания',
+        'src': 'html',
+    },
+    'chef': {
+        'label': 'Директор',
+        'src': 'html'
+    },
+    'age': {
+        'label': 'Возраст',
+    },
+    'country': {
+        'label': 'Страна',
+    }
+};
+
+gridView.render();
