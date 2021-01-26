@@ -69,9 +69,17 @@ class GridView {
         keys.forEach(key => {
 
             const th = document.createElement('th');
-            const label = this.attributes[key].label;
+            const attributesKey = this.attributes[key];
 
-            label ? th.textContent = label : th.textContent = key;
+            if (attributesKey.color){
+               th.style.background = attributesKey.color;
+            }
+            if (attributesKey.label) {
+                th.textContent = attributesKey.label;
+            } else {
+                th.textContent = key;
+            }
+
             trHeader.append(th);
         });
 
@@ -95,6 +103,9 @@ class GridView {
                 // src
                 if (attributesKey.src){
                     td.innerHTML = value;
+                }
+                if(attributesKey.color){
+                    td.style.background = attributesKey.color;
                 }
 
                 else{

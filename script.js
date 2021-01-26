@@ -40,10 +40,12 @@ gridView.attributes = {
     'company': {
         'label': 'Компания',
         'src': 'html',
+        'color': 'green'
     },
     'chef': {
         'label': 'Директор',
-        'src': 'html'
+        'src': 'html',
+        'color': 'pink'
     },
     'age': {
         'label': 'Возраст',
