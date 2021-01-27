@@ -32,8 +32,10 @@ const dataExample = [
 ];
 
 const gridView = new GridView();
+
 gridView.header = 'GridView';
 gridView.headerClass = ['header', 'site-header'];
+gridView.tableClass = ['my-table', 'some'];
 gridView.data = dataExample;
 
 gridView.attributes = {
@@ -56,3 +58,5 @@ gridView.attributes = {
 };
 
 gridView.render();
+gridView.addEvent('click', 'my-class');
+

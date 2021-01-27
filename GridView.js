@@ -47,6 +47,12 @@ class GridView {
         return false
     }
 
+    set tableClass(tableClass){
+        if (tableClass){
+            this._tableClass = tableClass;
+        }
+    }
+
     // Method for show GridViewTable
     render() {
 
@@ -71,8 +77,8 @@ class GridView {
             const th = document.createElement('th');
             const attributesKey = this.attributes[key];
 
-            if (attributesKey.color){
-               th.style.background = attributesKey.color;
+            if (attributesKey.color) {
+                th.style.background = attributesKey.color;
             }
             if (attributesKey.label) {
                 th.textContent = attributesKey.label;
@@ -88,37 +94,45 @@ class GridView {
 
         // draw table
 
-        this.data.forEach((item, i, data) =>{
+        this.data.forEach((item, i, data) => {
 
             let dataArr = this.data[i]; // string of data
             const tr = document.createElement('tr');
             const keys = Object.keys(this.attributes);
 
-            keys.forEach(key =>{
+            keys.forEach(key => {
 
                 const td = document.createElement('td');
                 let value = dataArr[key];
                 const attributesKey = this.attributes[key];
 
                 // src
-                if (attributesKey.src){
+                if (attributesKey.src) {
                     td.innerHTML = value;
                 }
-                if(attributesKey.color){
+                if (attributesKey.color) {
                     td.style.background = attributesKey.color;
-                }
-
-                else{
+                } else {
                     td.textContent = value;
                 }
 
                 tr.append(td);
             });
             table.append(tr);
-        })
-
+        });
     }
 
+    addEvent(trigger = 'click', cssClass = ''){
 
+        const selectors = this._tableClass.map(cssClass =>`.${cssClass}`);
+        const table = document.querySelector(String(...selectors));
 
+        table.addEventListener(trigger, (event) =>{
+
+            let target = event.target;
+            if (target.tagName !== 'TD') return null;
+            if(cssClass) target.classList.toggle(cssClass);
+
+        });
+    }
 }
